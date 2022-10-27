@@ -15,6 +15,8 @@ const ExpenseForm = (props) => {
   //   enteredDate: "",
   // });
 
+  // we get such 'event' object automatically, when a change event occurs.
+  // We can see this object in browser when we use f12 and see at the 'console' part
   const titleChangeHandler = (event) => {
     setEnteredTitle(event.target.value);
 
@@ -61,6 +63,9 @@ const ExpenseForm = (props) => {
   };
 
   const submitHandler = (event) => {
+    // prevents of sending the request, when 'submit' button is clicked. this is built into JS, nothing spesial behavior.
+    // So the page will no reload, because we want to stay on the currently loaded page without sending any request anywhere
+    // and we can continue handling this with JS.
     event.preventDefault();
 
     const expenseData = {
@@ -71,9 +76,9 @@ const ExpenseForm = (props) => {
 
     props.onSaveExpenseData(expenseData);
 
-    //to set all the form fields to empty field after the form was submitted.
+    //to set all the form fields to empty field after the form was submitted (form clearing).
     //And for that reason the value property is added to the each 'div' element
-    //it is the two way binding consept.
+    //it is the 'two way binding' consept.
     setEnteredTitle("");
     setEnteredAmount("");
     setEnteredDate("");
@@ -84,7 +89,12 @@ const ExpenseForm = (props) => {
       <div className="new-expense__controls">
         <div className="new-expense__control">
           <label>Title</label>
-          <input type="text" value={enteredTitle} onChange={titleChangeHandler} />
+          {/* sets the value into the form (value) */}
+          <input
+            type="text"
+            value={enteredTitle}
+            onChange={titleChangeHandler}
+          />
         </div>
         <div className="new-expense__control">
           <label>Amount</label>
@@ -92,6 +102,7 @@ const ExpenseForm = (props) => {
             type="number"
             min="0.01"
             step="0.01"
+            // sets the value into the form
             value={enteredAmount}
             onChange={amountChangeHandler}
           />
@@ -103,6 +114,7 @@ const ExpenseForm = (props) => {
             min="2019-01-01"
             max="2022-12-31"
             step="0.01"
+            // sets the value into the form
             value={enteredDate}
             onChange={dateChangeHandler}
           />
