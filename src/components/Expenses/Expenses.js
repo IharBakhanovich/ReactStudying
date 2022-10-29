@@ -1,24 +1,51 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 
 import ExpenseItem from "./ExpenseItem";
 import Card from "../UI/Card";
 import "./Expenses.css";
 import ExpensesFilter from "./ExpensesFilter";
+import ExpensesList from "./ExpensesList";
+import ExpensesChart from "./ExpencesChart";
 
 const Expenses = (props) => {
-
   const [filteredYear, setFilteredYear] = useState("2020");
-
 
   const filterChangeHandler = (selectedYear) => {
     setFilteredYear(selectedYear);
-  }
+  };
+
+  const filteredExpenses = props.items.filter((expence) => {
+    return expence.date.getFullYear().toString() === filteredYear;
+  });
+
+  
 
   return (
     <div>
       <Card className="expenses">
-        <ExpensesFilter selected={filteredYear} onChangeFilter={filterChangeHandler}/>
-        <ExpenseItem
+        <ExpensesFilter
+          selected={filteredYear}
+          onChangeFilter={filterChangeHandler}
+        />   
+        <ExpensesChart expenses={filteredExpenses}></ExpensesChart>     
+        <ExpensesList items = {filteredExpenses} />
+
+        {/* the second options is to do the logic here */}
+        {/* {filteredExpenses.length === 0 && <p>No expenses found</p>}
+        {filteredExpenses.length > 0 && 
+          // transforming the array of object into array of JSX elements, i.e ExpenceItems
+          filteredExpenses.map((expence) => (
+            <ExpenseItem
+              // a identificator of the item to help React
+              // to understand the position of the item inside the Array
+              key={expence.id}
+              title={expence.title}
+              amount={expence.amount}
+              date={expence.date}
+            />
+          ))} */}
+
+        {/* <ExpenseItem
           title={props.items[0].title}
           amount={props.items[0].amount}
           date={props.items[0].date}
@@ -37,7 +64,7 @@ const Expenses = (props) => {
           title={props.items[3].title}
           amount={props.items[3].amount}
           date={props.items[3].date}
-        />
+        /> */}
       </Card>
     </div>
   );

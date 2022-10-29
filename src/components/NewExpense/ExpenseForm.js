@@ -26,7 +26,8 @@ const ExpenseForm = (props) => {
     //     enteredTitle: event.target.value,
     // });
 
-    // react garantees that we will have the latest updated state snapshot. Use it when the state update depends on the prev state
+    // react garantees that we will have the latest updated state snapshot.
+    // Use it when the state update depends on the prev state
     // setUserInput((prevState) => {
     //   return { ...prevState, enteredTitle: event.target.value };
     // });
@@ -41,7 +42,8 @@ const ExpenseForm = (props) => {
     //   enteredAmount: event.target.value,
     // });
 
-    // react garantees that we will have the latest updated state snapshot. Use it when the state update depends on the prev state
+    // react garantees that we will have the latest updated state snapshot.
+    // Use it when the state update depends on the prev state
     // setUserInput((prevState) => {
     //   return { ...prevState, enteredAmount: event.target.value };
     // });
@@ -56,7 +58,8 @@ const ExpenseForm = (props) => {
     //   enteredDate: event.target.value,
     // });
 
-    // react garantees that we will have the latest updated state snapshot. Use it when the state update depends on the prev state
+    // react garantees that we will have the latest updated state snapshot.
+    // Use it when the state update depends on the prev state
     // setUserInput((prevState) => {
     //   return { ...prevState, enteredDate: event.target.value };
     // });
@@ -70,7 +73,7 @@ const ExpenseForm = (props) => {
 
     const expenseData = {
       title: enteredTitle,
-      amount: enteredAmount,
+      amount: +enteredAmount,
       date: new Date(enteredDate),
     };
 
@@ -120,7 +123,9 @@ const ExpenseForm = (props) => {
           />
         </div>
       </div>
+      {/* the button to submit data */}
       <div className="new-expense__actions">
+        <button type="button" onClick={props.onCancel}>Cancel</button>
         <button type="submit">Add Expense</button>
       </div>
     </form>
